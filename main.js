@@ -13,19 +13,7 @@ console.log(toDos);
 
 function paintToDo(text) {
   const li = document.createElement('li');
-  // const label = document.createElement('label');
-  // const input = document.createElement('input');
-  // const span = document.createElement('span');
-  // const newText = document.createTextNode(text);
-  // console.log(newText);
-  // input.id = 'list-check';
-  // input.type = 'checkbox';
-  // label.for = 'list-check';
   todoList.appendChild(li);
-  // li.appendChild(label);
-  // label.append(input);
-  // label.prepend(span);
-  // label.appendChild(newText);
 
   const toDoObject = {
     text: text,
