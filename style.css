@@ -1,6 +1,7 @@
 :root {
   /* color */
   --color-white: #fff;
+  --color-gray4: #ced4da;
   --color-gray7: #495057;
   --color-violet0: #f3f0ff;
   --color-violet2: #d0bfff;
@@ -32,7 +33,7 @@ body {
   flex-direction: column;
   width: 50vh;
   height: 70vh;
-  padding: 45px 20px;
+  padding: 45px 50px;
   box-sizing: border-box;
   font-family: 'Noto Sans KR', sans-serif;
   border-radius: var(--border-radius);
@@ -46,10 +47,11 @@ body {
   font-size: var(--margin-bottom);
 }
 
-.todoList {
-  display: block;
+.todoLists {
+  display: flex;
+  justify-content: center;
   margin: 30px 0;
-  width: 80%;
+  width: 90%;
   height: 85%;
   overflow-y: scroll;
 }
@@ -58,11 +60,13 @@ input[type='checkbox'] {
   display: none;
 }
 
-.todoList > li {
+.todoLists > li {
+  width: 80%;
+  height: 24px;
   font-size: 16px;
   display: flex;
   align-items: center;
-  margin: 14px 10px;
+  margin: 14px 0;
   padding: 16px;
   font-size: 16px;
   color: var(--color-gray7);
@@ -70,12 +74,33 @@ input[type='checkbox'] {
   font-weight: 500;
   border: 1px solid var(--color-gray);
   box-shadow: 0px 0px 2px 1px var(--color-gray);
+  position: relative;
 }
 
-.todoList > li:hover {
+.todoLists > li:hover {
   background-color: var(--color-violet0);
   color: var(--color-violet8);
   box-shadow: none;
+  transition: 500ms ease;
+}
+
+.del-btn {
+  /* visibility: hidden; */
+  border: none;
+  padding: 0;
+  background-color: transparent;
+  font-size: 15px;
+  display: flex-end;
+  color: var(--color-gray4);
+  transition: 500ms ease;
+  position: absolute;
+  right: 16px;
+}
+
+.todoLists > li:hover .del-btn {
+  /* visibility: visible; */
+  font-size: 15px;
+  color: var(--color-gray7);
   transition: 500ms ease;
 }
 
@@ -92,8 +117,6 @@ input[type='checkbox'] + label span {
   margin-right: 8px;
   vertical-align: middle;
   margin-top: -2px;
-  background-image: url('./img/check.png');
-  background-size: cover;
 }
 
 input[type='checkbox']:checked + label span {
@@ -101,6 +124,8 @@ input[type='checkbox']:checked + label span {
   border: 2px solid var(--color-violet8);
   width: 13px;
   height: 13px;
+  background-image: url('./img/check.png');
+  background-size: cover;
   background-color: var(--color-violet9);
   border-radius: 10px;
   margin-right: 8px;
