@@ -1,44 +1,107 @@
 const newBtn = document.querySelector('.new-btn');
 const listForm = document.querySelector('.list-form');
 const toDoInput = listForm.querySelector('input');
-const todoList = document.querySelector('.todoList');
+const todoLists = document.querySelector('.todoLists');
 const exit = document.querySelector('.exit');
 const title = document.querySelector('.title');
 const plus = document.querySelector('.plus');
-const btnInput = document.querySelector('.listing');
+const listing = document.querySelector('.listing');
+
 const TodosLocal = 'toDos';
+let toDos = [];
 
-const toDos = [];
-console.log(toDos);
-
+function saveToDos() {
+  localStorage.setItem(TodosLocal, JSON.stringify(toDos));
+}
 function paintToDo(text) {
-  const li = document.createElement('li');
-  todoList.appendChild(li);
-
+  const newId = toDos.length + 1;
   const toDoObject = {
     text: text,
-    id: toDos.length + 1,
+    id: newId,
   };
 
-  li.innerHTML = `<input type="checkbox" id="${toDoObject.id}">
-  <label for="${toDoObject.id}"><span></span>${text}
-  </label>`;
+  if (listing.value.length === 0) {
+    return false;
+  }
 
+  if (listing.value.length > 14) {
+    return false;
+  }
+
+  console.log(listing.value.length);
+
+  const li = document.createElement('li');
+  const delBtn = document.createElement('button');
+
+  delBtn.className = 'del-btn';
+  li.innerHTML = `
+    <input type="checkbox" id="${newId}">
+    <label for="${newId}">
+      <span></span>${text}
+    </label>
+    `;
+
+  li.appendChild(delBtn);
+  todoLists.appendChild(li);
+  li.className = newId;
+  delBtn.innerHTML = `<i class="far fa-trash-alt"></i>`;
+  delBtn.addEventListener('click', deleteList);
   toDos.push(toDoObject);
+  saveToDos();
+
+  // console.log(listing.value.length);
+}
+
+function deleteList(event) {
+  const btn = event.target;
+  const li = btn.parentNode.parentNode;
+  todoLists.removeChild(li);
+  const cleanToDos = toDos.filter(function (toDo) {
+    return toDo.id !== parseInt(li.className);
+  });
+  toDos = cleanToDos;
+  saveToDos();
 }
 
 function handleSubmit(event) {
   event.preventDefault();
-  const currenValue = toDoInput.value;
-  paintToDo(currenValue);
+  const currentValue = toDoInput.value;
+  paintToDo(currentValue);
   toDoInput.value = '';
   listForm.classList.remove('act');
 }
 
 function loadToDos() {
   const loadedToDos = localStorage.getItem(TodosLocal);
+  //LocalStorage란?
+  //데이터를 사용자 로컬에 보존하는 방식.
+  //데이터를 저장, 덮어쓰기, 삭제 등 조작 가능.
+  //자바스크립트(JavaScript)로 조작.
+  //모바일에서도 사용 가능
+
   if (loadedToDos !== null) {
+    const parsedToDos = JSON.parse(loadedToDos);
+    parsedToDos.forEach(function (toDo) {
+      paintToDo(toDo.text);
+    });
   }
+}
+
+function enterEvent() {
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      listForm.classList.add('act');
+      listing.focus();
+    }
+  });
+}
+
+function escEvent() {
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      listForm.classList.remove('act');
+    }
+  });
 }
 
 function clickEvent() {
@@ -63,6 +126,8 @@ function init() {
   loadToDos();
   listForm.addEventListener('submit', handleSubmit);
   clickEvent();
+  enterEvent();
+  escEvent();
 }
 
 init();
