@@ -9,8 +9,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap"
+      href="//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css"
       rel="stylesheet"
+      type="text/css"
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -19,6 +20,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" media="(max-width: 768px)" href="style_small.css" />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css"
@@ -34,14 +36,29 @@
   </head>
   <body>
     <div class="container">
-      <header class="title">TodoList</header>
-      <ul class="todoLists"></ul>
-      <button class="new-btn">ADD NEW</button>
-      <form class="list-form" method="POST">
-        <input class="listing" type="text" placeholder="Todolist" />
-        <button type="button" class="plus"><i class="fas fa-plus"></i></button>
-        <button type="button" class="exit"><i class="fas fa-times"></i></button>
-      </form>
+      <header class="title">
+        <h2 class="name">TodoList</h2>
+        <p class="date">new date</p>
+      </header>
+      <div class="main">
+        <ul class="todoLists"></ul>
+        <form class="list-form" method="POST">
+          <input
+            class="listing"
+            name="todo"
+            type="text"
+            placeholder="Todolist"
+          />
+          <button class="new-btn">add</button>
+        </form>
+        <button class="invisible-btn"></button>
+      </div>
+    </div>
+    <div class="alert">
+      <div class="alert__window">
+        <p class="alert__text">리스트를 작성해주세요.</p>
+        <button class="alert__okay">Okay</button>
+      </div>
     </div>
   </body>
 </html>
