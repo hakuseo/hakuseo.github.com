@@ -1,55 +1,78 @@
 const newBtn = document.querySelector('.new-btn');
 const listForm = document.querySelector('.list-form');
-const toDoInput = listForm.querySelector('input');
 const todoLists = document.querySelector('.todoLists');
 const exit = document.querySelector('.exit');
 const title = document.querySelector('.title');
 const plus = document.querySelector('.plus');
 const listing = document.querySelector('.listing');
-
+const invisibleBtn = document.querySelector('.invisible-btn');
+const todayDate = document.querySelector('.date');
+const alert = document.querySelector('.alert');
+const alertOkayBtn = document.querySelector('.alert__okay');
 const TodosLocal = 'toDos';
+
 let toDos = [];
+
+const dateDate = new Date();
+let week = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+let month = dateDate.getMonth() + 1;
+let date = dateDate.getDate();
+let today = dateDate.getDay();
+let todayLabel = week[today];
 
 function saveToDos() {
   localStorage.setItem(TodosLocal, JSON.stringify(toDos));
 }
+
+function dateSet() {
+  todayDate.innerText = `${month}/${date} ${todayLabel}.`;
+}
+
 function paintToDo(text) {
-  const newId = toDos.length + 1;
-  const toDoObject = {
-    text: text,
-    id: newId,
-  };
+  // for (let i = 0; i < text.length; i++) {
+  //   console.log(text);
+  // }
+  text = text.trim();
+  if (text == '') {
+    alert.style.display = 'flex';
 
-  if (listing.value.length === 0) {
     return false;
-  }
-
-  if (listing.value.length > 14) {
+  } else if (text.length > 50) {
+    alert('너무길어');
     return false;
+  } else {
+    const newId = toDos.length + 1;
+    const toDoObject = {
+      text: text,
+      id: newId,
+    };
+
+    const li = document.createElement('li');
+    const delBtn = document.createElement('button');
+
+    delBtn.className = 'del-btn';
+    li.innerHTML = `
+        <input type="checkbox" id="${newId}">
+        <label for="${newId}">
+          <span class="check-btn"></span>
+          <span class="text">${text}</span>
+        </label>
+        `;
+
+    li.appendChild(delBtn);
+    todoLists.appendChild(li);
+    li.className = newId;
+    delBtn.innerHTML = `<i class="far fa-trash-alt"></i>`;
+    delBtn.addEventListener('click', deleteList);
+    toDos.push(toDoObject);
+    saveToDos();
   }
+}
 
-  console.log(listing.value.length);
-
-  const li = document.createElement('li');
-  const delBtn = document.createElement('button');
-
-  delBtn.className = 'del-btn';
-  li.innerHTML = `
-    <input type="checkbox" id="${newId}">
-    <label for="${newId}">
-      <span></span>${text}
-    </label>
-    `;
-
-  li.appendChild(delBtn);
-  todoLists.appendChild(li);
-  li.className = newId;
-  delBtn.innerHTML = `<i class="far fa-trash-alt"></i>`;
-  delBtn.addEventListener('click', deleteList);
-  toDos.push(toDoObject);
-  saveToDos();
-
-  // console.log(listing.value.length);
+function alertBtnClick() {
+  alertOkayBtn.addEventListener('click', () => {
+    alert.style.display = 'none';
+  });
 }
 
 function deleteList(event) {
@@ -65,10 +88,9 @@ function deleteList(event) {
 
 function handleSubmit(event) {
   event.preventDefault();
-  const currentValue = toDoInput.value;
+  const currentValue = listing.value;
   paintToDo(currentValue);
-  toDoInput.value = '';
-  listForm.classList.remove('act');
+  listing.value = '';
 }
 
 function loadToDos() {
@@ -87,47 +109,229 @@ function loadToDos() {
   }
 }
 
-function enterEvent() {
-  window.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-      listForm.classList.add('act');
-      listing.focus();
+// function enterEvent() {
+//   window.addEventListener('keydown', (e) => {
+//     if (e.key === 'Enter') {
+//       invisibleBtn.style.visibility = 'hidden';
+//       newBtn.style.transition = '700ms ease';
+//       newBtn.style.transform = 'translate(115px)';
+//       listing.style.visibility = 'visible';
+//       listing.classList.add('fade-in');
+//       listing.classList.remove('fade-out');
+//     }
+//   });
+// }
+
+// function escEvent() {
+//   window.addEventListener('keydown', (e) => {
+//     if (e.key === 'Escape') {
+//       newBtn.style.transform = 'translate(-50px)';
+//       listing.style.visibility = 'hidden';
+//       invisibleBtn.style.visibility = 'visible';
+//       listing.classList.add('fade-out');
+//       listing.classList.remove('fade-in');
+//     }
+//   });
+// }
+
+// function inputEvent() {
+//   invisibleBtn.addEventListener('click', (e) => {
+//     invisibleBtn.style.visibility = 'hidden';
+//     newBtn.style.transition = '700ms ease';
+//     newBtn.style.transform = 'translate(115px)';
+//     listing.classList.add('fade-in');
+//     listing.classList.remove('fade-out');
+//     listing.style.visibility = 'visible';
+//   });
+
+//   newBtn.addEventListener('click', (e) => {
+//     invisibleBtn.style.visibility = 'visible';
+//     newBtn.style.transform = 'translate(-50px)';
+//     listing.style.visibility = 'hidden';
+//     listing.classList.add('fade-out');
+//     listing.classList.remove('fade-in');
+//     e.preventDefault();
+//     const currentValue = listing.value;
+//     paintToDo(currentValue);
+//     listing.value = '';
+//   });
+// }
+
+// function lineThrough() {
+//   const spanText = document.querySelector('.text');
+//   spanText.addEventListener('click', (e) => {
+//     spanText.style.textDecoration = 'line-through';
+//     spanText.style.color = 'var(--color-gray4)';
+//     spanText.style.transition = '500ms ease';
+//   });
+// }
+
+let mobileVer = window.matchMedia('screen and (max-width: 768px)');
+mobileVer.addListener(function (e) {
+  console.log('mobile');
+  if (e.matches) {
+    function enterEvent() {
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          invisibleBtn.style.visibility = 'hidden';
+          newBtn.style.transition = '700ms ease';
+          newBtn.style.transform = 'translate(60px)';
+          listing.style.visibility = 'visible';
+          listing.classList.add('fade-in');
+          listing.classList.remove('fade-out');
+        }
+      });
     }
-  });
-}
 
-function escEvent() {
-  window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      listForm.classList.remove('act');
+    function escEvent() {
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          newBtn.style.transform = 'translate(-45px)';
+          listing.style.visibility = 'hidden';
+          invisibleBtn.style.visibility = 'visible';
+          listing.classList.add('fade-out');
+          listing.classList.remove('fade-in');
+        }
+      });
     }
-  });
-}
 
-function clickEvent() {
-  newBtn.addEventListener('click', () => {
-    listForm.classList.add('act');
-  });
+    function inputEvent() {
+      invisibleBtn.addEventListener('click', (e) => {
+        invisibleBtn.style.visibility = 'hidden';
+        newBtn.style.transition = '700ms ease';
+        newBtn.style.transform = 'translate(52px)';
+        listing.classList.add('fade-in');
+        listing.classList.remove('fade-out');
+        listing.style.visibility = 'visible';
+      });
 
-  exit.addEventListener('click', () => {
-    listForm.classList.remove('act');
-  });
+      newBtn.addEventListener('click', (e) => {
+        invisibleBtn.style.visibility = 'visible';
+        newBtn.style.transform = 'translate(-45px)';
+        listing.style.visibility = 'hidden';
+        listing.classList.add('fade-out');
+        listing.classList.remove('fade-in');
+        e.preventDefault();
+        const currentValue = listing.value;
+        paintToDo(currentValue);
+        listing.value = '';
+      });
+    }
+    enterEvent();
+    escEvent();
+    inputEvent();
+  } else {
+    console.log('desktop');
+    function enterEvent() {
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          invisibleBtn.style.visibility = 'hidden';
+          newBtn.style.transition = '700ms ease';
+          newBtn.style.transform = 'translate(115px)';
+          listing.style.visibility = 'visible';
+          listing.classList.add('fade-in');
+          listing.classList.remove('fade-out');
+        }
+      });
+    }
 
-  plus.addEventListener('click', (event) => {
-    event.preventDefault();
-    const currentValue = toDoInput.value;
-    paintToDo(currentValue);
-    toDoInput.value = '';
-    listForm.classList.remove('act');
-  });
-}
+    function escEvent() {
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          newBtn.style.transform = 'translate(-50px)';
+          listing.style.visibility = 'hidden';
+          invisibleBtn.style.visibility = 'visible';
+          listing.classList.add('fade-out');
+          listing.classList.remove('fade-in');
+        }
+      });
+    }
+
+    function inputEvent() {
+      invisibleBtn.addEventListener('click', (e) => {
+        invisibleBtn.style.visibility = 'hidden';
+        newBtn.style.transition = '700ms ease';
+        newBtn.style.transform = 'translate(115px)';
+        listing.classList.add('fade-in');
+        listing.classList.remove('fade-out');
+        listing.style.visibility = 'visible';
+      });
+
+      newBtn.addEventListener('click', (e) => {
+        invisibleBtn.style.visibility = 'visible';
+        newBtn.style.transform = 'translate(-50px)';
+        listing.style.visibility = 'hidden';
+        listing.classList.add('fade-out');
+        listing.classList.remove('fade-in');
+        e.preventDefault();
+        const currentValue = listing.value;
+        paintToDo(currentValue);
+        listing.value = '';
+      });
+    }
+    enterEvent();
+    escEvent();
+    inputEvent();
+  }
+});
+
+// function enterEvent() {
+//   window.addEventListener('keydown', (e) => {
+//     if (e.key === 'Enter') {
+//       invisibleBtn.style.visibility = 'hidden';
+//       newBtn.style.transition = '700ms ease';
+//       newBtn.style.transform = 'translate(115px)';
+//       listing.style.visibility = 'visible';
+//       listing.classList.add('fade-in');
+//       listing.classList.remove('fade-out');
+//     }
+//   });
+// }
+
+// function escEvent() {
+//   window.addEventListener('keydown', (e) => {
+//     if (e.key === 'Escape') {
+//       newBtn.style.transform = 'translate(-50px)';
+//       listing.style.visibility = 'hidden';
+//       invisibleBtn.style.visibility = 'visible';
+//       listing.classList.add('fade-out');
+//       listing.classList.remove('fade-in');
+//     }
+//   });
+// }
+
+// function inputEvent() {
+//   invisibleBtn.addEventListener('click', (e) => {
+//     invisibleBtn.style.visibility = 'hidden';
+//     newBtn.style.transition = '700ms ease';
+//     newBtn.style.transform = 'translate(115px)';
+//     listing.classList.add('fade-in');
+//     listing.classList.remove('fade-out');
+//     listing.style.visibility = 'visible';
+//   });
+
+//   newBtn.addEventListener('click', (e) => {
+//     invisibleBtn.style.visibility = 'visible';
+//     newBtn.style.transform = 'translate(-50px)';
+//     listing.style.visibility = 'hidden';
+//     listing.classList.add('fade-out');
+//     listing.classList.remove('fade-in');
+//     e.preventDefault();
+//     const currentValue = listing.value;
+//     paintToDo(currentValue);
+//     listing.value = '';
+//   });
+// }
 
 function init() {
   loadToDos();
   listForm.addEventListener('submit', handleSubmit);
-  clickEvent();
-  enterEvent();
-  escEvent();
+  // inputEvent();
+  // enterEvent();
+  // escEvent();
+  dateSet();
+  alertBtnClick();
+  // lineThrough();
 }
 
 init();
