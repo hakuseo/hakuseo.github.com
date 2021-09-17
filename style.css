@@ -21,76 +21,77 @@
   --border-radius: 7px;
 }
 
-body {
-  height: 100vh;
+.body {
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100vh;
   background-color: var(--color-violet0);
-  position: relative;
 }
+
+/* container */
 
 .container {
-  background-color: #fff;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  width: 80vh;
-  height: 65vh;
-  padding: 50px 120px;
-  box-sizing: border-box;
+  background-color: var(--color-white);
+  max-width: 600px;
+  min-width: 365px;
+  width: 100%;
+  padding: 40px 0;
   border-radius: var(--border-radius);
-  box-shadow: 0px 0px 10px 3px var(--color-gray);
-  position: relative;
-  /* border: 3px solid red; */
+  margin: 30px;
 }
-
+/* title */
 .title {
   display: flex;
+  width: 70%;
   justify-content: space-between;
   align-items: center;
-  width: 50vh;
-  margin-bottom: 30px;
-  padding: 10px;
+  margin: 0 auto;
+  margin-bottom: 20px;
   font-family: var(--font-poppins);
-  /* border: 2px solid blueviolet; */
+  position: relative;
 }
 
 .title h2 {
-  font-size: 20px;
+  font-size: 23px;
+  letter-spacing: -0.4px;
+  font-weight: 600;
 }
+
 .title p {
   font-size: 13px;
 }
 
-.main {
-  width: 100%;
-}
+/* 메인 ul todolist 리스트들 */
+/* .main {
+  width: 60%;
+} */
 
 .todoLists {
-  height: 340px;
   display: flex;
   flex-wrap: wrap;
+  height: 300px;
   justify-content: center;
   align-content: flex-start;
   overflow-y: scroll;
-  /* border: 2px solid saddlebrown; */
+  margin: 0 auto;
+  margin-bottom: 20px;
 }
 
 .todoLists > li {
   display: flex;
   align-items: center;
-  width: 100%;
-  height: 50px;
+  width: 70%;
+  height: 45px;
   margin-bottom: 10px;
-  padding: 16px 20px;
+  padding: 15px;
+  box-sizing: border-box;
   font-size: var(--font-size);
   font-weight: 500;
   color: var(--color-gray7);
   border: 1px solid var(--color-gray);
   border-radius: var(--border-radius);
   position: relative;
-  box-sizing: border-box;
 }
 
 .todoLists > li:hover {
@@ -98,6 +99,11 @@ body {
   color: var(--color-violet8);
   box-shadow: none;
   transition: 500ms ease;
+}
+
+.text {
+  margin-top: 4px;
+  font-size: var(--font-size);
 }
 
 .del-btn {
@@ -148,14 +154,22 @@ input[type='checkbox']:checked + label .check-btn {
   margin-right: 8px;
 }
 
+.list__form {
+  display: flex;
+  margin: 0 auto;
+  width: 70%;
+  /* justify-content: center; */
+  /* align-items: center; */
+  /* position: relative; */
+  /* border: 2px solid red; */
+}
+
+/* todolist 적는 input */
 .listing {
-  visibility: hidden;
-  display: block;
+  /* visibility: hidden; */
+  display: flex;
   border: 1px solid var(--color-violet2);
-  position: absolute;
-  left: 140px;
-  bottom: 50px;
-  width: 360px;
+  width: 77%;
   height: 35px;
   color: var(--color-gray7);
   padding-left: 15px;
@@ -222,8 +236,20 @@ input[type='checkbox']:checked + label .check-btn {
   outline: none;
 }
 
-.new-btn {
+/* add버튼 */
+/* .add__btn {
+  display: flex;
   width: 100px;
+  height: 35px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+} */
+
+.new-btn {
+  display: inline-block;
+  width: 23%;
+  /* min-width: 80px; */
   height: 35px;
   border: none;
   background-color: var(--color-violet4);
@@ -234,31 +260,31 @@ input[type='checkbox']:checked + label .check-btn {
   font-size: var(--font-size);
   font-weight: 600;
   box-sizing: border-box;
-  position: absolute;
-  bottom: 50px;
-  left: 50%;
-  transform: translate(-50px);
+  /* transform: translate(-50px); */
 }
 
-.invisible-btn {
-  width: 100px;
+/* .invisible-btn {
+  display: inline-block;
+  width: 20%;
+  min-width: 80px;
   height: 35px;
-  border: none;
+  border: 2px solid slategray;
   background-color: transparent;
   border-radius: 50px;
   font-weight: 600;
   box-sizing: border-box;
   position: absolute;
-  bottom: 50px;
   left: 50%;
+  bottom: 0;
   transform: translate(-50px);
-}
+} */
 
 .new-btn:hover {
   background-color: var(--color-violet8);
   transition: 1000ms ease;
 }
 
+/* alert */
 .alert {
   z-index: 2000;
   display: none;
@@ -284,7 +310,6 @@ input[type='checkbox']:checked + label .check-btn {
   background-color: var(--color-white);
 }
 
-/* alert */
 .alert__text::before {
   content: 'alert!';
   display: block;

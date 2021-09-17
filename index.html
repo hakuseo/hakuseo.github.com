@@ -20,7 +20,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./style.css" />
-    <link rel="stylesheet" media="(max-width: 768px)" href="style_small.css" />
+    <!-- <link rel="stylesheet" media="(max-width: 768px)" href="style_small.css" /> -->
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css"
@@ -35,29 +35,33 @@
     <title>Todolist</title>
   </head>
   <body>
-    <div class="container">
-      <header class="title">
-        <h2 class="name">TodoList</h2>
-        <p class="date">new date</p>
-      </header>
-      <div class="main">
-        <ul class="todoLists"></ul>
-        <form class="list-form" method="POST">
-          <input
-            class="listing"
-            name="todo"
-            type="text"
-            placeholder="Todolist"
-          />
-          <button class="new-btn">add</button>
-        </form>
-        <button class="invisible-btn"></button>
+    <div class="body">
+      <div class="container">
+        <header class="title">
+          <h2 class="name">TodoList</h2>
+          <p class="date">new date</p>
+        </header>
+        <div class="main">
+          <ul class="todoLists"></ul>
+          <form class="list__form" method="POST">
+            <input
+              class="listing"
+              name="todo"
+              type="text"
+              placeholder="Todolist"
+            />
+            <!-- <div class="add__btn"> -->
+            <button class="new-btn">add</button>
+            <!-- <button class="invisible-btn"></button> -->
+            <!-- </div> -->
+          </form>
+        </div>
       </div>
-    </div>
-    <div class="alert">
-      <div class="alert__window">
-        <p class="alert__text">리스트를 작성해주세요.</p>
-        <button class="alert__okay">Okay</button>
+      <div class="alert">
+        <div class="alert__window">
+          <p class="alert__text">리스트를 작성해주세요.</p>
+          <button class="alert__okay">Okay</button>
+        </div>
       </div>
     </div>
   </body>

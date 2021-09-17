@@ -1,5 +1,5 @@
 const newBtn = document.querySelector('.new-btn');
-const listForm = document.querySelector('.list-form');
+const listForm = document.querySelector('.list__form');
 const todoLists = document.querySelector('.todoLists');
 const exit = document.querySelector('.exit');
 const title = document.querySelector('.title');
@@ -29,13 +29,9 @@ function dateSet() {
 }
 
 function paintToDo(text) {
-  // for (let i = 0; i < text.length; i++) {
-  //   console.log(text);
-  // }
   text = text.trim();
   if (text == '') {
     alert.style.display = 'flex';
-
     return false;
   } else if (text.length > 50) {
     alert('너무길어');
@@ -109,283 +105,279 @@ function loadToDos() {
   }
 }
 
-// function enterEvent() {
-//   window.addEventListener('keydown', (e) => {
-//     if (e.key === 'Enter') {
-//       invisibleBtn.style.visibility = 'hidden';
-//       newBtn.style.transition = '700ms ease';
-//       newBtn.style.transform = 'translate(115px)';
-//       listing.style.visibility = 'visible';
-//       listing.classList.add('fade-in');
-//       listing.classList.remove('fade-out');
-//     }
-//   });
-// }
-
-// function escEvent() {
-//   window.addEventListener('keydown', (e) => {
-//     if (e.key === 'Escape') {
-//       newBtn.style.transform = 'translate(-50px)';
-//       listing.style.visibility = 'hidden';
-//       invisibleBtn.style.visibility = 'visible';
-//       listing.classList.add('fade-out');
-//       listing.classList.remove('fade-in');
-//     }
-//   });
-// }
-
-// function inputEvent() {
-//   invisibleBtn.addEventListener('click', (e) => {
-//     invisibleBtn.style.visibility = 'hidden';
-//     newBtn.style.transition = '700ms ease';
-//     newBtn.style.transform = 'translate(115px)';
-//     listing.classList.add('fade-in');
-//     listing.classList.remove('fade-out');
-//     listing.style.visibility = 'visible';
-//   });
-
-//   newBtn.addEventListener('click', (e) => {
-//     invisibleBtn.style.visibility = 'visible';
-//     newBtn.style.transform = 'translate(-50px)';
-//     listing.style.visibility = 'hidden';
-//     listing.classList.add('fade-out');
-//     listing.classList.remove('fade-in');
-//     e.preventDefault();
-//     const currentValue = listing.value;
-//     paintToDo(currentValue);
-//     listing.value = '';
-//   });
-// }
-
-// function lineThrough() {
-//   const spanText = document.querySelector('.text');
-//   spanText.addEventListener('click', (e) => {
-//     spanText.style.textDecoration = 'line-through';
-//     spanText.style.color = 'var(--color-gray4)';
-//     spanText.style.transition = '500ms ease';
-//   });
-// }
-
-let windowWidth = window.innerWidth;
-console.log(windowWidth);
-
-function windowWidthEffects() {
-  if (windowWidth < 768) {
-    function enterEvent() {
-      window.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
-          invisibleBtn.style.visibility = 'hidden';
-          newBtn.style.transition = '700ms ease';
-          newBtn.style.transform = 'translate(60px)';
-          listing.style.visibility = 'visible';
-          listing.classList.add('fade-in');
-          listing.classList.remove('fade-out');
-        }
-      });
+function enterEvent() {
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      invisibleBtn.style.visibility = 'hidden';
+      newBtn.style.transition = '700ms ease';
+      newBtn.style.transform = 'translate(200px)';
+      listing.style.visibility = 'visible';
+      listing.classList.add('fade-in');
+      listing.classList.remove('fade-out');
     }
-
-    function escEvent() {
-      window.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-          newBtn.style.transform = 'translate(-45px)';
-          listing.style.visibility = 'hidden';
-          invisibleBtn.style.visibility = 'visible';
-          listing.classList.add('fade-out');
-          listing.classList.remove('fade-in');
-        }
-      });
-    }
-
-    function inputEvent() {
-      invisibleBtn.addEventListener('click', (e) => {
-        invisibleBtn.style.visibility = 'hidden';
-        newBtn.style.transition = '700ms ease';
-        newBtn.style.transform = 'translate(52px)';
-        listing.classList.add('fade-in');
-        listing.classList.remove('fade-out');
-        listing.style.visibility = 'visible';
-      });
-
-      newBtn.addEventListener('click', (e) => {
-        invisibleBtn.style.visibility = 'visible';
-        newBtn.style.transform = 'translate(-45px)';
-        listing.style.visibility = 'hidden';
-        listing.classList.add('fade-out');
-        listing.classList.remove('fade-in');
-        e.preventDefault();
-        const currentValue = listing.value;
-        paintToDo(currentValue);
-        listing.value = '';
-      });
-    }
-    enterEvent();
-    escEvent();
-    inputEvent();
-  } else {
-    console.log('desktop');
-    function enterEvent() {
-      window.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
-          invisibleBtn.style.visibility = 'hidden';
-          newBtn.style.transition = '700ms ease';
-          newBtn.style.transform = 'translate(115px)';
-          listing.style.visibility = 'visible';
-          listing.classList.add('fade-in');
-          listing.classList.remove('fade-out');
-        }
-      });
-    }
-
-    function escEvent() {
-      window.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-          newBtn.style.transform = 'translate(-50px)';
-          listing.style.visibility = 'hidden';
-          invisibleBtn.style.visibility = 'visible';
-          listing.classList.add('fade-out');
-          listing.classList.remove('fade-in');
-        }
-      });
-    }
-
-    function inputEvent() {
-      invisibleBtn.addEventListener('click', (e) => {
-        invisibleBtn.style.visibility = 'hidden';
-        newBtn.style.transition = '700ms ease';
-        newBtn.style.transform = 'translate(115px)';
-        listing.classList.add('fade-in');
-        listing.classList.remove('fade-out');
-        listing.style.visibility = 'visible';
-      });
-
-      newBtn.addEventListener('click', (e) => {
-        invisibleBtn.style.visibility = 'visible';
-        newBtn.style.transform = 'translate(-50px)';
-        listing.style.visibility = 'hidden';
-        listing.classList.add('fade-out');
-        listing.classList.remove('fade-in');
-        e.preventDefault();
-        const currentValue = listing.value;
-        paintToDo(currentValue);
-        listing.value = '';
-      });
-    }
-    enterEvent();
-    escEvent();
-    inputEvent();
-  }
+  });
 }
 
-windowWidthEffects();
-
-let mobileVer = window.matchMedia('screen and (max-width: 768px)');
-mobileVer.addListener(function (e) {
-  console.log(e);
-  if (e.matches) {
-    function enterEvent() {
-      window.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
-          invisibleBtn.style.visibility = 'hidden';
-          newBtn.style.transition = '700ms ease';
-          newBtn.style.transform = 'translate(60px)';
-          listing.style.visibility = 'visible';
-          listing.classList.add('fade-in');
-          listing.classList.remove('fade-out');
-        }
-      });
+function escEvent() {
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      newBtn.style.transform = 'translate(-50px)';
+      listing.style.visibility = 'hidden';
+      invisibleBtn.style.visibility = 'visible';
+      listing.classList.add('fade-out');
+      listing.classList.remove('fade-in');
     }
+  });
+}
 
-    function escEvent() {
-      window.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-          newBtn.style.transform = 'translate(-45px)';
-          listing.style.visibility = 'hidden';
-          invisibleBtn.style.visibility = 'visible';
-          listing.classList.add('fade-out');
-          listing.classList.remove('fade-in');
-        }
-      });
-    }
+function inputEvent() {
+  invisibleBtn.addEventListener('click', (e) => {
+    invisibleBtn.style.visibility = 'hidden';
+    newBtn.style.transition = '700ms ease';
+    newBtn.style.transform = 'translate(200px)';
+    listing.classList.add('fade-in');
+    listing.classList.remove('fade-out');
+    listing.style.visibility = 'visible';
+  });
 
-    function inputEvent() {
-      invisibleBtn.addEventListener('click', (e) => {
-        invisibleBtn.style.visibility = 'hidden';
-        newBtn.style.transition = '700ms ease';
-        newBtn.style.transform = 'translate(52px)';
-        listing.classList.add('fade-in');
-        listing.classList.remove('fade-out');
-        listing.style.visibility = 'visible';
-      });
+  newBtn.addEventListener('click', (e) => {
+    invisibleBtn.style.visibility = 'visible';
+    newBtn.style.transform = 'translate(-50px)';
+    listing.style.visibility = 'hidden';
+    listing.classList.add('fade-out');
+    listing.classList.remove('fade-in');
+    e.preventDefault();
+    const currentValue = listing.value;
+    paintToDo(currentValue);
+    listing.value = '';
+  });
+}
 
-      newBtn.addEventListener('click', (e) => {
-        invisibleBtn.style.visibility = 'visible';
-        newBtn.style.transform = 'translate(-45px)';
-        listing.style.visibility = 'hidden';
-        listing.classList.add('fade-out');
-        listing.classList.remove('fade-in');
-        e.preventDefault();
-        const currentValue = listing.value;
-        paintToDo(currentValue);
-        listing.value = '';
-      });
-    }
-    enterEvent();
-    escEvent();
-    inputEvent();
-  } else {
-    console.log('desktop');
-    function enterEvent() {
-      window.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
-          invisibleBtn.style.visibility = 'hidden';
-          newBtn.style.transition = '700ms ease';
-          newBtn.style.transform = 'translate(115px)';
-          listing.style.visibility = 'visible';
-          listing.classList.add('fade-in');
-          listing.classList.remove('fade-out');
-        }
-      });
-    }
+function lineThrough() {
+  const spanText = document.querySelector('.text');
+  spanText.addEventListener('click', (e) => {
+    spanText.style.textDecoration = 'line-through';
+    spanText.style.color = 'var(--color-gray4)';
+    spanText.style.transition = '500ms ease';
+  });
+}
 
-    function escEvent() {
-      window.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-          newBtn.style.transform = 'translate(-50px)';
-          listing.style.visibility = 'hidden';
-          invisibleBtn.style.visibility = 'visible';
-          listing.classList.add('fade-out');
-          listing.classList.remove('fade-in');
-        }
-      });
-    }
+// let windowWidth = window.innerWidth;
 
-    function inputEvent() {
-      invisibleBtn.addEventListener('click', (e) => {
-        invisibleBtn.style.visibility = 'hidden';
-        newBtn.style.transition = '700ms ease';
-        newBtn.style.transform = 'translate(115px)';
-        listing.classList.add('fade-in');
-        listing.classList.remove('fade-out');
-        listing.style.visibility = 'visible';
-      });
+// function windowWidthEffects() {
+//   if (windowWidth < 768) {
+//     function enterEvent() {
+//       window.addEventListener('keydown', (e) => {
+//         if (e.key === 'Enter') {
+//           invisibleBtn.style.visibility = 'hidden';
+//           newBtn.style.transition = '700ms ease';
+//           newBtn.style.transform = 'translate(60px)';
+//           listing.style.visibility = 'visible';
+//           listing.classList.add('fade-in');
+//           listing.classList.remove('fade-out');
+//         }
+//       });
+//     }
 
-      newBtn.addEventListener('click', (e) => {
-        invisibleBtn.style.visibility = 'visible';
-        newBtn.style.transform = 'translate(-50px)';
-        listing.style.visibility = 'hidden';
-        listing.classList.add('fade-out');
-        listing.classList.remove('fade-in');
-        e.preventDefault();
-        const currentValue = listing.value;
-        paintToDo(currentValue);
-        listing.value = '';
-      });
-    }
-    enterEvent();
-    escEvent();
-    inputEvent();
-  }
-});
+//     function escEvent() {
+//       window.addEventListener('keydown', (e) => {
+//         if (e.key === 'Escape') {
+//           newBtn.style.transform = 'translate(-45px)';
+//           listing.style.visibility = 'hidden';
+//           invisibleBtn.style.visibility = 'visible';
+//           listing.classList.add('fade-out');
+//           listing.classList.remove('fade-in');
+//         }
+//       });
+//     }
+
+//     function inputEvent() {
+//       invisibleBtn.addEventListener('click', (e) => {
+//         invisibleBtn.style.visibility = 'hidden';
+//         newBtn.style.transition = '700ms ease';
+//         newBtn.style.transform = 'translate(52px)';
+//         listing.classList.add('fade-in');
+//         listing.classList.remove('fade-out');
+//         listing.style.visibility = 'visible';
+//       });
+
+//       newBtn.addEventListener('click', (e) => {
+//         invisibleBtn.style.visibility = 'visible';
+//         newBtn.style.transform = 'translate(-45px)';
+//         listing.style.visibility = 'hidden';
+//         listing.classList.add('fade-out');
+//         listing.classList.remove('fade-in');
+//         e.preventDefault();
+//         const currentValue = listing.value;
+//         paintToDo(currentValue);
+//         listing.value = '';
+//       });
+//     }
+//     enterEvent();
+//     escEvent();
+//     inputEvent();
+//   } else {
+//     function enterEvent() {
+//       window.addEventListener('keydown', (e) => {
+//         if (e.key === 'Enter') {
+//           invisibleBtn.style.visibility = 'hidden';
+//           newBtn.style.transition = '700ms ease';
+//           newBtn.style.transform = 'translate(10vh)';
+//           listing.style.visibility = 'visible';
+//           listing.classList.add('fade-in');
+//           listing.classList.remove('fade-out');
+//         }
+//       });
+//     }
+
+//     function escEvent() {
+//       window.addEventListener('keydown', (e) => {
+//         if (e.key === 'Escape') {
+//           newBtn.style.transform = 'translate(-50px)';
+//           listing.style.visibility = 'hidden';
+//           invisibleBtn.style.visibility = 'visible';
+//           listing.classList.add('fade-out');
+//           listing.classList.remove('fade-in');
+//         }
+//       });
+//     }
+
+//     function inputEvent() {
+//       invisibleBtn.addEventListener('click', (e) => {
+//         invisibleBtn.style.visibility = 'hidden';
+//         newBtn.style.transition = '700ms ease';
+//         newBtn.style.transform = 'translate(10vh)';
+//         listing.classList.add('fade-in');
+//         listing.classList.remove('fade-out');
+//         listing.style.visibility = 'visible';
+//       });
+
+//       newBtn.addEventListener('click', (e) => {
+//         invisibleBtn.style.visibility = 'visible';
+//         newBtn.style.transform = 'translate(-50px)';
+//         listing.style.visibility = 'hidden';
+//         listing.classList.add('fade-out');
+//         listing.classList.remove('fade-in');
+//         e.preventDefault();
+//         const currentValue = listing.value;
+//         paintToDo(currentValue);
+//         listing.value = '';
+//       });
+//     }
+//     enterEvent();
+//     escEvent();
+//     inputEvent();
+//   }
+// }
+
+// windowWidthEffects();
+
+// let mobileVer = window.matchMedia('screen and (max-width: 768px)');
+// mobileVer.addListener(function (e) {
+//   if (e.matches) {
+//     function enterEvent() {
+//       window.addEventListener('keydown', (e) => {
+//         if (e.key === 'Enter') {
+//           invisibleBtn.style.visibility = 'hidden';
+//           newBtn.style.transition = '700ms ease';
+//           newBtn.style.transform = 'translate(60px)';
+//           listing.style.visibility = 'visible';
+//           listing.classList.add('fade-in');
+//           listing.classList.remove('fade-out');
+//         }
+//       });
+//     }
+
+//     function escEvent() {
+//       window.addEventListener('keydown', (e) => {
+//         if (e.key === 'Escape') {
+//           newBtn.style.transform = 'translate(-45px)';
+//           listing.style.visibility = 'hidden';
+//           invisibleBtn.style.visibility = 'visible';
+//           listing.classList.add('fade-out');
+//           listing.classList.remove('fade-in');
+//         }
+//       });
+//     }
+
+//     function inputEvent() {
+//       invisibleBtn.addEventListener('click', (e) => {
+//         invisibleBtn.style.visibility = 'hidden';
+//         newBtn.style.transition = '700ms ease';
+//         newBtn.style.transform = 'translate(52px)';
+//         listing.classList.add('fade-in');
+//         listing.classList.remove('fade-out');
+//         listing.style.visibility = 'visible';
+//       });
+
+//       newBtn.addEventListener('click', (e) => {
+//         invisibleBtn.style.visibility = 'visible';
+//         newBtn.style.transform = 'translate(-45px)';
+//         listing.style.visibility = 'hidden';
+//         listing.classList.add('fade-out');
+//         listing.classList.remove('fade-in');
+//         e.preventDefault();
+//         const currentValue = listing.value;
+//         paintToDo(currentValue);
+//         listing.value = '';
+//       });
+//     }
+//     enterEvent();
+//     escEvent();
+//     inputEvent();
+//   } else {
+//     function enterEvent() {
+//       window.addEventListener('keydown', (e) => {
+//         if (e.key === 'Enter') {
+//           invisibleBtn.style.visibility = 'hidden';
+//           newBtn.style.transition = '700ms ease';
+//           newBtn.style.transform = 'translate(200px)';
+//           listing.style.visibility = 'visible';
+//           listing.classList.add('fade-in');
+//           listing.classList.remove('fade-out');
+//         }
+//       });
+//     }
+
+//     function escEvent() {
+//       window.addEventListener('keydown', (e) => {
+//         if (e.key === 'Escape') {
+//           newBtn.style.transform = 'translate(-50px)';
+//           listing.style.visibility = 'hidden';
+//           invisibleBtn.style.visibility = 'visible';
+//           listing.classList.add('fade-out');
+//           listing.classList.remove('fade-in');
+//         }
+//       });
+//     }
+
+//     function inputEvent() {
+//       invisibleBtn.addEventListener('click', (e) => {
+//         invisibleBtn.style.visibility = 'hidden';
+//         newBtn.style.transition = '700ms ease';
+//         newBtn.style.transform = 'translate(200px)';
+//         listing.classList.add('fade-in');
+//         listing.classList.remove('fade-out');
+//         listing.style.visibility = 'visible';
+//       });
+
+//       newBtn.addEventListener('click', (e) => {
+//         invisibleBtn.style.visibility = 'visible';
+//         newBtn.style.transform = 'translate(-50px)';
+//         listing.style.visibility = 'hidden';
+//         listing.classList.add('fade-out');
+//         listing.classList.remove('fade-in');
+//         e.preventDefault();
+//         const currentValue = listing.value;
+//         paintToDo(currentValue);
+//         listing.value = '';
+//       });
+//     }
+//     enterEvent();
+//     escEvent();
+//     inputEvent();
+//   }
+// });
 
 function init() {
   loadToDos();

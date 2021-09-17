@@ -20,8 +20,9 @@
   --margin-bottom: 30px;
   --border-radius: 7px;
 }
-
+/* body */
 body {
+  width: 100%;
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -30,14 +31,16 @@ body {
   position: relative;
 }
 
+/* container */
 .container {
   background-color: #fff;
   display: flex;
   align-items: center;
+  justify-content: center;
   flex-direction: column;
-  width: 50vh;
-  height: 90vh;
-  padding: 50px 40px;
+  width: 60%;
+  height: 70%;
+  padding: 30px 3.5em;
   box-sizing: border-box;
   border-radius: var(--border-radius);
   box-shadow: 0px 0px 10px 3px var(--color-gray);
@@ -46,23 +49,29 @@ body {
 }
 
 /* title */
-.container > .title {
+.title {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
+  width: 50vh;
   margin-bottom: 30px;
   padding: 10px;
   font-family: var(--font-poppins);
+
   /* border: 2px solid blueviolet; */
 }
 
 .title h2 {
-  font-size: 20px;
+  font-size: 23px;
+  letter-spacing: -0.4px;
+  font-weight: 600;
 }
+
 .title p {
   font-size: 13px;
 }
 
+/* 메인 ul todolist 리스트들 */
 .main {
   width: 100%;
 }
@@ -74,14 +83,14 @@ body {
   justify-content: center;
   align-content: flex-start;
   overflow-y: scroll;
-  /* border: 2px solid saddlebrown; */
 }
 
 .todoLists > li {
   display: flex;
   align-items: center;
-  width: 90%;
+  width: 100%;
   height: 50px;
+  margin: 0 3.5em;
   margin-bottom: 10px;
   padding: 16px 20px;
   font-size: var(--font-size);
@@ -98,6 +107,11 @@ body {
   color: var(--color-violet8);
   box-shadow: none;
   transition: 500ms ease;
+}
+
+.text {
+  margin-top: 4px;
+  font-size: var(--font-size);
 }
 
 .del-btn {
@@ -148,14 +162,16 @@ input[type='checkbox']:checked + label .check-btn {
   margin-right: 8px;
 }
 
+/* todolist 적는 input */
 .listing {
   visibility: hidden;
   display: block;
+  width: 40vh;
   border: 1px solid var(--color-violet2);
   position: absolute;
-  left: 70px;
+  left: 15vh;
   bottom: 50px;
-  width: 230px;
+
   height: 35px;
   color: var(--color-gray7);
   padding-left: 15px;
@@ -222,10 +238,10 @@ input[type='checkbox']:checked + label .check-btn {
   outline: none;
 }
 
+/* add버튼 */
 .new-btn {
-  width: 90px;
+  width: 100px;
   height: 35px;
-  margin-right: 50px;
   border: none;
   background-color: var(--color-violet4);
   color: #fff;
@@ -238,13 +254,13 @@ input[type='checkbox']:checked + label .check-btn {
   position: absolute;
   bottom: 50px;
   left: 50%;
-  transform: translate(-45px);
+  transform: translate(-50px);
 }
 
 .invisible-btn {
-  width: 90px;
+  width: 100px;
   height: 35px;
-  border: 2px solid red;
+  border: none;
   background-color: transparent;
   border-radius: 50px;
   font-weight: 600;
@@ -252,7 +268,7 @@ input[type='checkbox']:checked + label .check-btn {
   position: absolute;
   bottom: 50px;
   left: 50%;
-  transform: translate(-45px);
+  transform: translate(-50px);
 }
 
 .new-btn:hover {
@@ -261,7 +277,6 @@ input[type='checkbox']:checked + label .check-btn {
 }
 
 /* alert */
-
 .alert {
   z-index: 2000;
   display: none;
@@ -279,7 +294,7 @@ input[type='checkbox']:checked + label .check-btn {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  max-width: 300px;
+  max-width: 350px;
   width: 100%;
   height: 200px;
   border-radius: 5px;
