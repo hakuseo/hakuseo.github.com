@@ -111,31 +111,40 @@ function loadToDos() {
   }
 }
 
-// function keyEvent() {
-//   window.addEventListener('keydown', (e) => {
-//     if (e.key === 'Enter') {
-//       invisibleBtn.style.visibility = 'hidden';
-//       setTimeout(function () {
-//         newBtn.style.transition = '700ms ease';
-//         newBtn.classList.add('btn-transition');
-//         invisibleBtn.classList.add('btn-transition');
-//         listing.style.visibility = 'visible';
-//       }, 100);
-//     }
-//   });
+// window.onload = function () {
+//   let browserWidth = document.body.clientWidth;
+//   if (browserWidth < 420) {
+//     newBtn.innerText = '+';
+//     invisibleBtn.innerText = '+';
+//     newBtn.style.fontSize = '30px';
+//     invisibleBtn.style.fontSize = '30px';
+//     invisibleBtn.style.fontWeight = '100';
+//   } else {
+//     newBtn.innerText = 'add';
+//     invisibleBtn.innerText = 'add';
+//     newBtn.style.fontSize = 'var(--font-size)';
+//     invisibleBtn.style.fontSize = 'var(--font-size)';
+//     invisibleBtn.style.fontWeight = '600';
+//   }
+// };
 
-//   window.addEventListener('keydown', (e) => {
-//     if (e.key === 'Escape') {
-//       listing.style.visibility = 'hidden';
-//       newBtn.style.transition = '700ms ease';
-//       newBtn.classList.remove('btn-transition'),
-//         invisibleBtn.classList.remove('btn-transition');
-//       setTimeout(function () {
-//         invisibleBtn.style.visibility = 'visible';
-//       }, 600);
-//     }
-//   });
-// }
+// window.addEventListener('resize', () => {
+//   let browserWidth = document.body.clientWidth;
+//   if (browserWidth < 420) {
+//     newBtn.innerText = '+';
+//     invisibleBtn.innerText = '+';
+//     newBtn.style.fontSize = '30px';
+//     invisibleBtn.style.fontSize = '30px';
+//     newBtn.style.fontWeight = '100';
+//     invisibleBtn.style.fontWeight = '100';
+//   } else {
+//     newBtn.innerText = 'add';
+//     invisibleBtn.innerText = 'add';
+//     newBtn.style.fontSize = 'var(--font-size)';
+//     invisibleBtn.style.fontSize = 'var(--font-size)';
+//     invisibleBtn.style.fontWeight = '600';
+//   }
+// });
 
 function inputEvent() {
   invisibleBtn.addEventListener('click', (e) => {
