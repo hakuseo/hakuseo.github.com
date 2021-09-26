@@ -1,9 +1,6 @@
 const newBtn = document.querySelector('.new-btn');
 const listForm = document.querySelector('.list__form');
 const todoLists = document.querySelector('.todoLists');
-const exit = document.querySelector('.exit');
-const title = document.querySelector('.title');
-const plus = document.querySelector('.plus');
 const listing = document.querySelector('.listing');
 const invisibleBtn = document.querySelector('.invisible-btn');
 const todayDate = document.querySelector('.date');
@@ -15,6 +12,7 @@ let toDos = [];
 
 const dateDate = new Date();
 let week = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+let years = dateDate.getFullYear();
 let month = dateDate.getMonth() + 1;
 let date = dateDate.getDate();
 let today = dateDate.getDay();
@@ -25,16 +23,16 @@ function saveToDos() {
 }
 
 function dateSet() {
-  todayDate.innerText = `${month}/${date} ${todayLabel}.`;
+  todayDate.innerText = `${years}년 ${month}월 ${date}일 ${todayLabel}.`;
 }
 
 function paintToDo(text) {
   text = text.trim();
-  if (text == '') {
+  if (text === '') {
     alert.style.display = 'flex';
     return false;
   } else if (text.length > 50) {
-    alert('너무길어');
+    console.log('none');
     return false;
   } else {
     const newId = toDos.length + 1;
@@ -45,21 +43,29 @@ function paintToDo(text) {
 
     const li = document.createElement('li');
     const delBtn = document.createElement('button');
-
+    const input = document.createElement('input');
     delBtn.className = 'del-btn';
+
     li.innerHTML = `
-        <input type="checkbox" id="${newId}">
         <label for="${newId}">
           <span class="check-btn"></span>
           <span class="text">${text}</span>
         </label>
         `;
 
+    input.type = 'checkbox';
+    input.id = `${newId}`;
+    li.prepend(input);
     li.appendChild(delBtn);
     todoLists.appendChild(li);
     li.className = newId;
     delBtn.innerHTML = `<i class="far fa-trash-alt"></i>`;
     delBtn.addEventListener('click', deleteList);
+    input.addEventListener('click', (e) => {
+      const chkBox = e.target;
+      const chkBoxState = chkBox.checked;
+      toDoObject.check = chkBoxState;
+    });
     toDos.push(toDoObject);
     saveToDos();
   }
@@ -105,47 +111,51 @@ function loadToDos() {
   }
 }
 
-function enterEvent() {
-  window.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-      invisibleBtn.style.visibility = 'hidden';
-      newBtn.style.transition = '700ms ease';
-      newBtn.style.transform = 'translate(200px)';
-      listing.style.visibility = 'visible';
-      listing.classList.add('fade-in');
-      listing.classList.remove('fade-out');
-    }
-  });
-}
+// function keyEvent() {
+//   window.addEventListener('keydown', (e) => {
+//     if (e.key === 'Enter') {
+//       invisibleBtn.style.visibility = 'hidden';
+//       setTimeout(function () {
+//         newBtn.style.transition = '700ms ease';
+//         newBtn.classList.add('btn-transition');
+//         invisibleBtn.classList.add('btn-transition');
+//         listing.style.visibility = 'visible';
+//       }, 100);
+//     }
+//   });
 
-function escEvent() {
-  window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      newBtn.style.transform = 'translate(-50px)';
-      listing.style.visibility = 'hidden';
-      invisibleBtn.style.visibility = 'visible';
-      listing.classList.add('fade-out');
-      listing.classList.remove('fade-in');
-    }
-  });
-}
+//   window.addEventListener('keydown', (e) => {
+//     if (e.key === 'Escape') {
+//       listing.style.visibility = 'hidden';
+//       newBtn.style.transition = '700ms ease';
+//       newBtn.classList.remove('btn-transition'),
+//         invisibleBtn.classList.remove('btn-transition');
+//       setTimeout(function () {
+//         invisibleBtn.style.visibility = 'visible';
+//       }, 600);
+//     }
+//   });
+// }
 
 function inputEvent() {
   invisibleBtn.addEventListener('click', (e) => {
     invisibleBtn.style.visibility = 'hidden';
-    newBtn.style.transition = '700ms ease';
-    newBtn.style.transform = 'translate(200px)';
-    listing.classList.add('fade-in');
-    listing.classList.remove('fade-out');
-    listing.style.visibility = 'visible';
+    setTimeout(function () {
+      newBtn.style.transition = '700ms ease';
+      newBtn.classList.add('btn-transition');
+      invisibleBtn.classList.add('btn-transition');
+      listing.style.visibility = 'visible';
+    }, 300);
   });
 
   newBtn.addEventListener('click', (e) => {
-    invisibleBtn.style.visibility = 'visible';
-    newBtn.style.transform = 'translate(-50px)';
     listing.style.visibility = 'hidden';
-    listing.classList.add('fade-out');
-    listing.classList.remove('fade-in');
+    newBtn.style.transition = '700ms ease';
+    newBtn.classList.remove('btn-transition');
+    invisibleBtn.classList.remove('btn-transition');
+    setTimeout(function () {
+      invisibleBtn.style.visibility = 'visible';
+    }, 600);
     e.preventDefault();
     const currentValue = listing.value;
     paintToDo(currentValue);
@@ -153,241 +163,12 @@ function inputEvent() {
   });
 }
 
-function lineThrough() {
-  const spanText = document.querySelector('.text');
-  spanText.addEventListener('click', (e) => {
-    spanText.style.textDecoration = 'line-through';
-    spanText.style.color = 'var(--color-gray4)';
-    spanText.style.transition = '500ms ease';
-  });
-}
-
-// let windowWidth = window.innerWidth;
-
-// function windowWidthEffects() {
-//   if (windowWidth < 768) {
-//     function enterEvent() {
-//       window.addEventListener('keydown', (e) => {
-//         if (e.key === 'Enter') {
-//           invisibleBtn.style.visibility = 'hidden';
-//           newBtn.style.transition = '700ms ease';
-//           newBtn.style.transform = 'translate(60px)';
-//           listing.style.visibility = 'visible';
-//           listing.classList.add('fade-in');
-//           listing.classList.remove('fade-out');
-//         }
-//       });
-//     }
-
-//     function escEvent() {
-//       window.addEventListener('keydown', (e) => {
-//         if (e.key === 'Escape') {
-//           newBtn.style.transform = 'translate(-45px)';
-//           listing.style.visibility = 'hidden';
-//           invisibleBtn.style.visibility = 'visible';
-//           listing.classList.add('fade-out');
-//           listing.classList.remove('fade-in');
-//         }
-//       });
-//     }
-
-//     function inputEvent() {
-//       invisibleBtn.addEventListener('click', (e) => {
-//         invisibleBtn.style.visibility = 'hidden';
-//         newBtn.style.transition = '700ms ease';
-//         newBtn.style.transform = 'translate(52px)';
-//         listing.classList.add('fade-in');
-//         listing.classList.remove('fade-out');
-//         listing.style.visibility = 'visible';
-//       });
-
-//       newBtn.addEventListener('click', (e) => {
-//         invisibleBtn.style.visibility = 'visible';
-//         newBtn.style.transform = 'translate(-45px)';
-//         listing.style.visibility = 'hidden';
-//         listing.classList.add('fade-out');
-//         listing.classList.remove('fade-in');
-//         e.preventDefault();
-//         const currentValue = listing.value;
-//         paintToDo(currentValue);
-//         listing.value = '';
-//       });
-//     }
-//     enterEvent();
-//     escEvent();
-//     inputEvent();
-//   } else {
-//     function enterEvent() {
-//       window.addEventListener('keydown', (e) => {
-//         if (e.key === 'Enter') {
-//           invisibleBtn.style.visibility = 'hidden';
-//           newBtn.style.transition = '700ms ease';
-//           newBtn.style.transform = 'translate(10vh)';
-//           listing.style.visibility = 'visible';
-//           listing.classList.add('fade-in');
-//           listing.classList.remove('fade-out');
-//         }
-//       });
-//     }
-
-//     function escEvent() {
-//       window.addEventListener('keydown', (e) => {
-//         if (e.key === 'Escape') {
-//           newBtn.style.transform = 'translate(-50px)';
-//           listing.style.visibility = 'hidden';
-//           invisibleBtn.style.visibility = 'visible';
-//           listing.classList.add('fade-out');
-//           listing.classList.remove('fade-in');
-//         }
-//       });
-//     }
-
-//     function inputEvent() {
-//       invisibleBtn.addEventListener('click', (e) => {
-//         invisibleBtn.style.visibility = 'hidden';
-//         newBtn.style.transition = '700ms ease';
-//         newBtn.style.transform = 'translate(10vh)';
-//         listing.classList.add('fade-in');
-//         listing.classList.remove('fade-out');
-//         listing.style.visibility = 'visible';
-//       });
-
-//       newBtn.addEventListener('click', (e) => {
-//         invisibleBtn.style.visibility = 'visible';
-//         newBtn.style.transform = 'translate(-50px)';
-//         listing.style.visibility = 'hidden';
-//         listing.classList.add('fade-out');
-//         listing.classList.remove('fade-in');
-//         e.preventDefault();
-//         const currentValue = listing.value;
-//         paintToDo(currentValue);
-//         listing.value = '';
-//       });
-//     }
-//     enterEvent();
-//     escEvent();
-//     inputEvent();
-//   }
-// }
-
-// windowWidthEffects();
-
-// let mobileVer = window.matchMedia('screen and (max-width: 768px)');
-// mobileVer.addListener(function (e) {
-//   if (e.matches) {
-//     function enterEvent() {
-//       window.addEventListener('keydown', (e) => {
-//         if (e.key === 'Enter') {
-//           invisibleBtn.style.visibility = 'hidden';
-//           newBtn.style.transition = '700ms ease';
-//           newBtn.style.transform = 'translate(60px)';
-//           listing.style.visibility = 'visible';
-//           listing.classList.add('fade-in');
-//           listing.classList.remove('fade-out');
-//         }
-//       });
-//     }
-
-//     function escEvent() {
-//       window.addEventListener('keydown', (e) => {
-//         if (e.key === 'Escape') {
-//           newBtn.style.transform = 'translate(-45px)';
-//           listing.style.visibility = 'hidden';
-//           invisibleBtn.style.visibility = 'visible';
-//           listing.classList.add('fade-out');
-//           listing.classList.remove('fade-in');
-//         }
-//       });
-//     }
-
-//     function inputEvent() {
-//       invisibleBtn.addEventListener('click', (e) => {
-//         invisibleBtn.style.visibility = 'hidden';
-//         newBtn.style.transition = '700ms ease';
-//         newBtn.style.transform = 'translate(52px)';
-//         listing.classList.add('fade-in');
-//         listing.classList.remove('fade-out');
-//         listing.style.visibility = 'visible';
-//       });
-
-//       newBtn.addEventListener('click', (e) => {
-//         invisibleBtn.style.visibility = 'visible';
-//         newBtn.style.transform = 'translate(-45px)';
-//         listing.style.visibility = 'hidden';
-//         listing.classList.add('fade-out');
-//         listing.classList.remove('fade-in');
-//         e.preventDefault();
-//         const currentValue = listing.value;
-//         paintToDo(currentValue);
-//         listing.value = '';
-//       });
-//     }
-//     enterEvent();
-//     escEvent();
-//     inputEvent();
-//   } else {
-//     function enterEvent() {
-//       window.addEventListener('keydown', (e) => {
-//         if (e.key === 'Enter') {
-//           invisibleBtn.style.visibility = 'hidden';
-//           newBtn.style.transition = '700ms ease';
-//           newBtn.style.transform = 'translate(200px)';
-//           listing.style.visibility = 'visible';
-//           listing.classList.add('fade-in');
-//           listing.classList.remove('fade-out');
-//         }
-//       });
-//     }
-
-//     function escEvent() {
-//       window.addEventListener('keydown', (e) => {
-//         if (e.key === 'Escape') {
-//           newBtn.style.transform = 'translate(-50px)';
-//           listing.style.visibility = 'hidden';
-//           invisibleBtn.style.visibility = 'visible';
-//           listing.classList.add('fade-out');
-//           listing.classList.remove('fade-in');
-//         }
-//       });
-//     }
-
-//     function inputEvent() {
-//       invisibleBtn.addEventListener('click', (e) => {
-//         invisibleBtn.style.visibility = 'hidden';
-//         newBtn.style.transition = '700ms ease';
-//         newBtn.style.transform = 'translate(200px)';
-//         listing.classList.add('fade-in');
-//         listing.classList.remove('fade-out');
-//         listing.style.visibility = 'visible';
-//       });
-
-//       newBtn.addEventListener('click', (e) => {
-//         invisibleBtn.style.visibility = 'visible';
-//         newBtn.style.transform = 'translate(-50px)';
-//         listing.style.visibility = 'hidden';
-//         listing.classList.add('fade-out');
-//         listing.classList.remove('fade-in');
-//         e.preventDefault();
-//         const currentValue = listing.value;
-//         paintToDo(currentValue);
-//         listing.value = '';
-//       });
-//     }
-//     enterEvent();
-//     escEvent();
-//     inputEvent();
-//   }
-// });
-
 function init() {
   loadToDos();
   listForm.addEventListener('submit', handleSubmit);
-  // inputEvent();
-  // enterEvent();
-  // escEvent();
+  inputEvent();
   dateSet();
   alertBtnClick();
-  // lineThrough();
 }
 
 init();
