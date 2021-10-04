@@ -64,7 +64,6 @@ function paintToDo(text) {
     input.addEventListener('click', (e) => {
       const chkBox = e.target;
       const chkBoxState = chkBox.checked;
-      toDoObject.check = chkBoxState;
     });
     toDos.push(toDoObject);
     saveToDos();
