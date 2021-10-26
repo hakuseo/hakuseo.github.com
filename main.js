@@ -61,14 +61,26 @@ function paintToDo(text) {
     li.className = newId;
     delBtn.innerHTML = `<i class="far fa-trash-alt"></i>`;
     delBtn.addEventListener('click', deleteList);
-    input.addEventListener('click', (e) => {
-      const chkBox = e.target;
-      const chkBoxState = chkBox.checked;
-    });
     toDos.push(toDoObject);
     saveToDos();
   }
 }
+
+let checkedLists = [];
+todoLists.addEventListener('change', (e) => {
+  const checkedList = {
+    id: e.target.id,
+    checked: e.target.checked,
+  };
+
+  // checkedLists.push(checkedList);
+  // const checkListIdFilter = checkedLists.filter((item, id) => {
+  //   return checkedLists.indexOf(item) === id;
+  // });
+
+  // console.log(checkListIdFilter);
+  // localStorage.setItem('checked', JSON.stringify(checkedLists));
+});
 
 function alertBtnClick() {
   alertOkayBtn.addEventListener('click', () => {
@@ -96,11 +108,6 @@ function handleSubmit(event) {
 
 function loadToDos() {
   const loadedToDos = localStorage.getItem(TodosLocal);
-  //LocalStorage란?
-  //데이터를 사용자 로컬에 보존하는 방식.
-  //데이터를 저장, 덮어쓰기, 삭제 등 조작 가능.
-  //자바스크립트(JavaScript)로 조작.
-  //모바일에서도 사용 가능
 
   if (loadedToDos !== null) {
     const parsedToDos = JSON.parse(loadedToDos);
@@ -109,41 +116,6 @@ function loadToDos() {
     });
   }
 }
-
-// window.onload = function () {
-//   let browserWidth = document.body.clientWidth;
-//   if (browserWidth < 420) {
-//     newBtn.innerText = '+';
-//     invisibleBtn.innerText = '+';
-//     newBtn.style.fontSize = '30px';
-//     invisibleBtn.style.fontSize = '30px';
-//     invisibleBtn.style.fontWeight = '100';
-//   } else {
-//     newBtn.innerText = 'add';
-//     invisibleBtn.innerText = 'add';
-//     newBtn.style.fontSize = 'var(--font-size)';
-//     invisibleBtn.style.fontSize = 'var(--font-size)';
-//     invisibleBtn.style.fontWeight = '600';
-//   }
-// };
-
-// window.addEventListener('resize', () => {
-//   let browserWidth = document.body.clientWidth;
-//   if (browserWidth < 420) {
-//     newBtn.innerText = '+';
-//     invisibleBtn.innerText = '+';
-//     newBtn.style.fontSize = '30px';
-//     invisibleBtn.style.fontSize = '30px';
-//     newBtn.style.fontWeight = '100';
-//     invisibleBtn.style.fontWeight = '100';
-//   } else {
-//     newBtn.innerText = 'add';
-//     invisibleBtn.innerText = 'add';
-//     newBtn.style.fontSize = 'var(--font-size)';
-//     invisibleBtn.style.fontSize = 'var(--font-size)';
-//     invisibleBtn.style.fontWeight = '600';
-//   }
-// });
 
 function inputEvent() {
   invisibleBtn.addEventListener('click', (e) => {
