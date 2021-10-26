@@ -26,9 +26,10 @@ function dateSet() {
   todayDate.innerText = `${years}년 ${month}월 ${date}일 ${todayLabel}.`;
 }
 
-let toDoObject = {};
+let toDoObject = { completed: false };
 
-function paintToDo(text, id, checked = false) {
+function paintToDo(text, id, completed) {
+  console.log(id);
   text = text.trim();
   if (text === '') {
     alert.style.display = 'flex';
@@ -38,7 +39,7 @@ function paintToDo(text, id, checked = false) {
     toDoObject = {
       text: text,
       id: newId,
-      check: checked,
+      completed: completed,
     };
 
     const li = document.createElement('li');
@@ -54,34 +55,36 @@ function paintToDo(text, id, checked = false) {
         `;
 
     input.type = 'checkbox';
-    input.id = `${newId}`;
+    input.id = newId;
+    input.checked = completed;
     li.prepend(input);
     li.appendChild(delBtn);
     todoLists.appendChild(li);
     li.className = newId;
     delBtn.innerHTML = `<i class="far fa-trash-alt"></i>`;
     delBtn.addEventListener('click', deleteList);
-    todoLists.addEventListener('change', inputCheck);
     toDos.push(toDoObject);
     saveToDos();
-
-    const inputEl = document.getElementById(id);
-    if (inputEl === null) {
+    if (completed === undefined) {
       return false;
-    } else {
-      inputEl.checked = toDoObject.check;
     }
   }
 }
 
-function inputCheck(e) {
-  const targetId = e.target.id - 1;
-  const targetCheck = e.target.checked;
-  const input = e.target;
-  toDos[targetId].check = targetCheck;
-  input.setAttribute('checked', targetCheck);
+todoLists.addEventListener('change', (e) => {
+  const id = e.target.id - 1;
+  toDos[id].completed = e.target.checked;
   saveToDos();
-}
+  const inputGrandParent = e.target.parentNode.parentNode;
+  const inputParent = e.target.parentNode;
+
+  if (e.target.checked === true) {
+    // toDos[id].id = id + 10000;
+    // console.log(toDos[id]);
+    inputGrandParent.appendChild(inputParent);
+    saveToDos();
+  }
+});
 
 function alertBtnClick() {
   alertOkayBtn.addEventListener('click', () => {
@@ -113,7 +116,7 @@ function loadToDos() {
   if (loadedToDos !== null) {
     const parsedToDos = JSON.parse(loadedToDos);
     parsedToDos.forEach(function (toDo) {
-      paintToDo(toDo.text, toDo.id, toDo.check);
+      paintToDo(toDo.text, toDo.id, toDo.completed);
     });
   }
 }
