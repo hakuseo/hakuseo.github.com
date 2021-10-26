@@ -26,19 +26,19 @@ function dateSet() {
   todayDate.innerText = `${years}년 ${month}월 ${date}일 ${todayLabel}.`;
 }
 
-function paintToDo(text) {
+let toDoObject = {};
+
+function paintToDo(text, id, checked = false) {
   text = text.trim();
   if (text === '') {
     alert.style.display = 'flex';
     return false;
-  } else if (text.length > 50) {
-    console.log('none');
-    return false;
   } else {
     const newId = toDos.length + 1;
-    const toDoObject = {
+    toDoObject = {
       text: text,
       id: newId,
+      check: checked,
     };
 
     const li = document.createElement('li');
@@ -61,26 +61,27 @@ function paintToDo(text) {
     li.className = newId;
     delBtn.innerHTML = `<i class="far fa-trash-alt"></i>`;
     delBtn.addEventListener('click', deleteList);
+    todoLists.addEventListener('change', inputCheck);
     toDos.push(toDoObject);
     saveToDos();
+
+    const inputEl = document.getElementById(id);
+    if (inputEl === null) {
+      return false;
+    } else {
+      inputEl.checked = toDoObject.check;
+    }
   }
 }
 
-let checkedLists = [];
-todoLists.addEventListener('change', (e) => {
-  const checkedList = {
-    id: e.target.id,
-    checked: e.target.checked,
-  };
-
-  // checkedLists.push(checkedList);
-  // const checkListIdFilter = checkedLists.filter((item, id) => {
-  //   return checkedLists.indexOf(item) === id;
-  // });
-
-  // console.log(checkListIdFilter);
-  // localStorage.setItem('checked', JSON.stringify(checkedLists));
-});
+function inputCheck(e) {
+  const targetId = e.target.id - 1;
+  const targetCheck = e.target.checked;
+  const input = e.target;
+  toDos[targetId].check = targetCheck;
+  input.setAttribute('checked', targetCheck);
+  saveToDos();
+}
 
 function alertBtnClick() {
   alertOkayBtn.addEventListener('click', () => {
@@ -112,7 +113,7 @@ function loadToDos() {
   if (loadedToDos !== null) {
     const parsedToDos = JSON.parse(loadedToDos);
     parsedToDos.forEach(function (toDo) {
-      paintToDo(toDo.text);
+      paintToDo(toDo.text, toDo.id, toDo.check);
     });
   }
 }
