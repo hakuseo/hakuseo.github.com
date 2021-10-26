@@ -35,7 +35,7 @@ function paintToDo(text, id, completed) {
     alert.style.display = 'flex';
     return false;
   } else {
-    const newId = toDos.length + 1;
+    const newId = id;
     toDoObject = {
       text: text,
       id: newId,
@@ -82,6 +82,8 @@ todoLists.addEventListener('change', (e) => {
     // toDos[id].id = id + 10000;
     // console.log(toDos[id]);
     inputGrandParent.appendChild(inputParent);
+    // const toDosCompleted = toDos.completed.filter((completed) => completed);
+    console.log(toDosCompleted);
     saveToDos();
   }
 });
