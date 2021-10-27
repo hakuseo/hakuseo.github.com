@@ -29,44 +29,46 @@ function dateSet() {
 let toDoObject = { completed: false };
 
 function paintToDo(text, id, completed) {
-  console.log(id);
   text = text.trim();
   if (text === '') {
     alert.style.display = 'flex';
     return false;
   } else {
-    const newId = id;
-    toDoObject = {
-      text: text,
-      id: newId,
-      completed: completed,
-    };
+    const newId = toDos.length + 1;
+    idCheck();
+    function idCheck(id = newId) {
+      toDoObject = {
+        text: text,
+        id: id,
+        completed: completed,
+      };
 
-    const li = document.createElement('li');
-    const delBtn = document.createElement('button');
-    const input = document.createElement('input');
-    delBtn.className = 'del-btn';
+      const li = document.createElement('li');
+      const delBtn = document.createElement('button');
+      const input = document.createElement('input');
+      delBtn.className = 'del-btn';
 
-    li.innerHTML = `
-        <label for="${newId}">
+      li.innerHTML = `
+        <label for="${id}">
           <span class="check-btn"></span>
           <span class="text">${text}</span>
         </label>
         `;
 
-    input.type = 'checkbox';
-    input.id = newId;
-    input.checked = completed;
-    li.prepend(input);
-    li.appendChild(delBtn);
-    todoLists.appendChild(li);
-    li.className = newId;
-    delBtn.innerHTML = `<i class="far fa-trash-alt"></i>`;
-    delBtn.addEventListener('click', deleteList);
-    toDos.push(toDoObject);
-    saveToDos();
-    if (completed === undefined) {
-      return false;
+      input.type = 'checkbox';
+      input.id = id;
+      input.checked = completed;
+      li.prepend(input);
+      li.appendChild(delBtn);
+      todoLists.appendChild(li);
+      li.className = id;
+      delBtn.innerHTML = `<i class="far fa-trash-alt"></i>`;
+      delBtn.addEventListener('click', deleteList);
+      toDos.push(toDoObject);
+      saveToDos();
+      if (completed === undefined) {
+        return false;
+      }
     }
   }
 }
@@ -74,18 +76,15 @@ function paintToDo(text, id, completed) {
 todoLists.addEventListener('change', (e) => {
   const id = e.target.id - 1;
   toDos[id].completed = e.target.checked;
-  saveToDos();
-  const inputGrandParent = e.target.parentNode.parentNode;
-  const inputParent = e.target.parentNode;
 
-  if (e.target.checked === true) {
-    // toDos[id].id = id + 10000;
-    // console.log(toDos[id]);
-    inputGrandParent.appendChild(inputParent);
-    // const toDosCompleted = toDos.completed.filter((completed) => completed);
-    console.log(toDosCompleted);
-    saveToDos();
-  }
+  const toDosCompletedCheck = toDos
+    .filter((item) => !item.completed)
+    .concat(toDos.filter((item) => item.completed));
+
+  toDos.splice(1, toDosCompletedCheck);
+  console.log(toDosCompletedCheck);
+  console.log(toDos);
+  saveToDos();
 });
 
 function alertBtnClick() {
