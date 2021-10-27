@@ -35,6 +35,7 @@ function paintToDo(text, id, completed) {
     return false;
   } else {
     const newId = toDos.length + 1;
+    id = id;
     idCheck();
     function idCheck(id = newId) {
       toDoObject = {
@@ -76,14 +77,6 @@ function paintToDo(text, id, completed) {
 todoLists.addEventListener('change', (e) => {
   const id = e.target.id - 1;
   toDos[id].completed = e.target.checked;
-
-  const toDosCompletedCheck = toDos
-    .filter((item) => !item.completed)
-    .concat(toDos.filter((item) => item.completed));
-
-  toDos.splice(1, toDosCompletedCheck);
-  console.log(toDosCompletedCheck);
-  console.log(toDos);
   saveToDos();
 });
 

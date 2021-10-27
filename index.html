@@ -16,7 +16,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./style.css" />
@@ -24,12 +24,7 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css"
     />
-    <link
-      rel="stylesheet"
-      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
-      integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
-      crossorigin="anonymous"
-    />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="main.js" defer></script>
     <title>Todolist</title>
   </head>
@@ -57,8 +52,14 @@
         </div>
         <div class="alert">
           <div class="alert__window">
-            <p class="alert__text">리스트를 작성해주세요.</p>
-            <button class="alert__okay">Okay</button>
+            <h2 class="alert__text">
+              <span class="material-icons-outlined">
+                error_outline
+              </span>
+              <span class="alert__title">Something wrong<span class="alert__subtitle">투두리스트를 작성해주세요.</span></span>
+              
+              </h2>
+            <button class="alert__okay">OK</button>
           </div>
         </div>
         
