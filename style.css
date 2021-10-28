@@ -207,6 +207,7 @@ input[type='checkbox']:checked + label .text {
 }
 
 /* add 버튼 */
+
 .add-btn {
   display: inline-block;
   width: 75px;

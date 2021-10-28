@@ -125,7 +125,6 @@ function inputEvent() {
       listing.style.visibility = 'visible';
     }, 300);
   });
-  //
   addBtn.addEventListener('click', (e) => {
     listing.style.visibility = 'hidden';
     addBtn.style.transition = '700ms ease';
