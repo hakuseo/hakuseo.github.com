@@ -1,4 +1,4 @@
-const newBtn = document.querySelector('.new-btn');
+const addBtn = document.querySelector('.add-btn');
 const listForm = document.querySelector('.list__form');
 const todoLists = document.querySelector('.todoLists');
 const listing = document.querySelector('.listing');
@@ -66,10 +66,10 @@ function paintToDo(text, id, completed) {
       delBtn.innerHTML = `<i class="far fa-trash-alt"></i>`;
       delBtn.addEventListener('click', deleteList);
       toDos.push(toDoObject);
-      saveToDos();
       if (completed === undefined) {
         return false;
       }
+      saveToDos();
     }
   }
 }
@@ -119,17 +119,17 @@ function inputEvent() {
   invisibleBtn.addEventListener('click', (e) => {
     invisibleBtn.style.visibility = 'hidden';
     setTimeout(function () {
-      newBtn.style.transition = '700ms ease';
-      newBtn.classList.add('btn-transition');
+      addBtn.style.transition = '700ms ease';
+      addBtn.classList.add('btn-transition');
       invisibleBtn.classList.add('btn-transition');
       listing.style.visibility = 'visible';
     }, 300);
   });
 
-  newBtn.addEventListener('click', (e) => {
+  addBtn.addEventListener('click', (e) => {
     listing.style.visibility = 'hidden';
-    newBtn.style.transition = '700ms ease';
-    newBtn.classList.remove('btn-transition');
+    addBtn.style.transition = '700ms ease';
+    addBtn.classList.remove('btn-transition');
     invisibleBtn.classList.remove('btn-transition');
     setTimeout(function () {
       invisibleBtn.style.visibility = 'visible';
