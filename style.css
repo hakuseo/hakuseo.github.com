@@ -130,7 +130,6 @@ input[type='checkbox']:checked + label .check-btn {
   background-size: cover;
   background-color: transparent;
   border-radius: 10px;
-  margin-right: 8px;
 }
 
 input[type='checkbox'] + label .text {
