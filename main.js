@@ -7,6 +7,7 @@ const todayDate = document.querySelector('.date');
 const alert = document.querySelector('.alert');
 const alertOkayBtn = document.querySelector('.alert__okay');
 const TodosLocal = 'toDos';
+const logo = document.querySelector('.logo');
 
 let toDos = [];
 
@@ -17,6 +18,13 @@ let month = dateDate.getMonth() + 1;
 let date = dateDate.getDate();
 let today = dateDate.getDay();
 let todayLabel = week[today];
+
+const logoInvisible = document.querySelector('.logo-invisible');
+window.onload = function () {
+  setTimeout(() => {
+    logo.classList.add('logo-invisible');
+  }, 2000);
+};
 
 function saveToDos() {
   localStorage.setItem(TodosLocal, JSON.stringify(toDos));
