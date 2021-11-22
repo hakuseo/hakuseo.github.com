@@ -74,6 +74,7 @@ function paintToDo(text, id, completed) {
       delBtn.innerHTML = `<i class="far fa-trash-alt"></i>`;
       delBtn.addEventListener('click', deleteList);
       toDos.push(toDoObject);
+      saveToDos();
       if (completed === undefined) {
         return false;
       }
